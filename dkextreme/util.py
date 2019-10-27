@@ -1,2 +1,5 @@
-SCREENRECT = pg.Rect(0, 0, 640, 480)
+import pygame
+
+screenX, screenY = 600,600
+SCREENRECT = pygame.Rect(0, 0, screenX, screenY)
 GRAVITY = 5 

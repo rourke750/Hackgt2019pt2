@@ -4,7 +4,7 @@ import random
 from . import util
 
 SCREENRECT = util.SCREENRECT
-GRAVITY = uti.GRAVITY
+GRAVITY = util.GRAVITY
 
 class Platform(pg.sprite.Sprite):
     def __init__(self, speed, direction):
@@ -25,9 +25,13 @@ class Barrel(pg.sprite.Sprite):
         # Figure out gravity and if they need to fall by dropping them by gravity
         self.rect.y = self.rect.y + GRAVITY
         # Let's scan for platforms
-        for platform in pg.sprite.spritecollide(self, platforms, 1):
-            
-        self.rect.move_ip(self.facing, 0)
+        falling = False
+        for platform in pg.sprite.spritecollide(self, platforms, True):
+            falling = True
+            # For each platform, we should set the bottom of the barrel to the top of it.
+            self.rect.top += self.rect.top - platform.rect.top
+        if not falling:
+            self.rect.move_ip(self.facing, 0)
         if not SCREENRECT.contains(self.rect):
             self.facing = -self.facing
             self.rect.top = self.rect.bottom + 1
