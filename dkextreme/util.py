@@ -1,0 +1,2 @@
+SCREENRECT = pg.Rect(0, 0, 640, 480)
+GRAVITY = 5 
